@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../utilities/axiosConfig";
 import { UserType } from "../@types/user";
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
+import UserItem from "../sections/user/userItem";
 
 const Home = () => {
   const [users, setUsers] = useState<UserType[]>([]);
@@ -35,36 +36,21 @@ const Home = () => {
   );
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <h1>User List</h1>
+    <Box sx={{ width: "100%", padding: "24px", marginTop: "40px" }}>
+      <h1>Question 5: Frontend</h1>
       <Box sx={{ m: 4 }}>
         <input
           type="text"
           placeholder="Search by name"
           value={searchTerm}
           onChange={handleSearch}
-          style={{ color: "black" }}
+          style={{ color: "black", padding: "8px" }}
         />
       </Box>
 
       <Grid container spacing={3}>
         {filteredUsers.map((user) => (
-          <Grid item xs={12} md={6} lg={4}>
-            <Card sx={{ minWidth: 275 }}>
-              <CardContent>
-                <Typography
-                  sx={{ fontSize: 14 }}
-                  color="text.secondary"
-                  gutterBottom
-                >
-                  {user.name}
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  {user.email}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+          <UserItem user={user} />
         ))}
       </Grid>
     </Box>
